@@ -24,7 +24,7 @@ namespace PRN231_API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comic>>> Get()
+        public async Task<ActionResult<IEnumerable<Comic>>> GetAllComic()
         {
             var comics = await context.Comics.ToListAsync();
             return Ok(comics);
@@ -34,7 +34,7 @@ namespace PRN231_API.Controllers
         {
             var comics = await context.Comics.Include(c => c.Chapters)
                 .OrderByDescending(c => c.Chapters.Count())
-                .Take(5)
+                .Take(5) // giới hạn kq
                 .ToListAsync();
             return Ok(comics);
         }

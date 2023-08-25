@@ -20,7 +20,7 @@ namespace PRN231_API.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUser()
         {
             var users = await context.Users.ToListAsync();
             var usersDTO = mapper.Map<List<UserDTO>>(users);
@@ -44,7 +44,7 @@ namespace PRN231_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserDTO userDTO)
+        public async Task<ActionResult> PostCreatetNewUser([FromBody] UserDTO userDTO)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +93,7 @@ namespace PRN231_API.Controllers
             context.SaveChanges();
             return Ok("Follow successful!");
         }
+
         [HttpPost("unfollow/{UserId}/{ComicId}")]
         public async Task<ActionResult> UnFollow(int UserId, int ComicId)
         {

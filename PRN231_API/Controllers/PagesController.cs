@@ -21,7 +21,7 @@ namespace PRN231_API.Controllers
         }
 
         [HttpGet("{chapterId}")]
-        public async Task<ActionResult<IEnumerable<Page>>> Get(int chapterId)
+        public async Task<ActionResult<IEnumerable<Page>>> GetPagesByChapterId(int chapterId)
         {
             var pages = await context.Pages.Where(p => p.ChapterId == chapterId)
                 .OrderBy(p => p.PageNumber).ToListAsync();
@@ -29,7 +29,7 @@ namespace PRN231_API.Controllers
         }
 
         [HttpPost("{chapterId}")]
-        public async Task<ActionResult> Post(int chapterId, IFormFile[] imgPage)
+        public async Task<ActionResult> PostPagesByChapterId(int chapterId, IFormFile[] imgPage)
         {
             var chapter = await context.Chapters.FirstOrDefaultAsync(c => c.ChapterId == chapterId);
             if (chapter == null) return NotFound("This chapter doesn't exist!");

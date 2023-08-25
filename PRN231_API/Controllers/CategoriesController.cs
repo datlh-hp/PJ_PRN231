@@ -20,7 +20,7 @@ namespace PRN231_API.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAllCategory()
         {
             var categories = await context.Categories.ToListAsync();
             var categoriesDTO = mapper.Map<List<CategoryDTO>>(categories);
@@ -28,7 +28,7 @@ namespace PRN231_API.Controllers
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<CategoryDTO>> GetById(int id)
+        public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id)
         {
             var category = await context.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
             if (category == null) return NotFound();
